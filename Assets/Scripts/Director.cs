@@ -22,6 +22,8 @@ public class Director : MonoBehaviour
     public float score; 
     public float bestScore;
     public string key = "BestScore";
+    public Text Endscore;
+    public Text EndbestScore;
 
     [Header ("Combo")]
     public bool isCombo = false;
@@ -148,6 +150,8 @@ public class Director : MonoBehaviour
         }
 
         IsStart = false;
+        Endscore.text = "Score : " + score;
+        EndbestScore.text = "Best : " + bestScore;
         End.SetActive(true);
         FindObjectOfType<Audio>().AudioPlay("Over");
     }
