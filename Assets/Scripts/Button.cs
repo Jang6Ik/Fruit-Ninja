@@ -10,11 +10,31 @@ public class Button : MonoBehaviour
     public GameObject startFruits;
     private Fruit sliceFruit;
 
+    public bool isPause = false;
+
     private void Awake()
     {
         director = GetComponent<Director>();
         generator = GetComponent<Generator>();
         setStartFruit();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (director.IsStart)
+            {
+                if (isPause)
+                {
+                    GameResume();
+                }
+                else if (!isPause)
+                {
+                    GamePause();
+                }
+            }
+        }
     }
 
     public void setStartFruit()
@@ -44,6 +64,7 @@ public class Button : MonoBehaviour
 
     public void GamePause()
     {
+        isPause = true;
         FindObjectOfType<Audio>().AudioPlay("Bt");
         director.GetComponent<AudioSource>().Pause();
         Time.timeScale = 0;
@@ -53,6 +74,7 @@ public class Button : MonoBehaviour
 
     public void GameResume()
     {
+        isPause = false;
         FindObjectOfType<Audio>().AudioPlay("Bt");
         Time.timeScale = 1;
         director.GetComponent<AudioSource>().Play();

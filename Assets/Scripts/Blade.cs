@@ -27,7 +27,7 @@ public class Blade : MonoBehaviour
 
     private void Update()
     {
-        if (director.IsStart == true)
+        if (director.IsStart == true && FindObjectOfType<Button>().isPause == false)
         {
 
             if (Input.GetMouseButtonDown(0))
@@ -43,6 +43,7 @@ public class Blade : MonoBehaviour
             {
                 Slice();
             }
+
         }
         else
         {
